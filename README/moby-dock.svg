@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="Ebene_1"
+   data-name="Ebene 1"
+   width="704.33209"
+   height="400"
+   viewBox="0 0 704.33209 400"
+   version="1.1"
+   sodipodi:docname="moby-dock.svg"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06">
+  <metadata
+     id="metadata160">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1916"
+     inkscape:window-height="1021"
+     id="namedview158"
+     showgrid="false"
+     inkscape:zoom="0.39333333"
+     inkscape:cx="304.1695"
+     inkscape:cy="149.19999"
+     inkscape:window-x="0"
+     inkscape:window-y="57"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="Ebene_1" />
+  <defs
+     id="defs4">
+    <style
+       id="style2">.cls-1{fill:#354750;}.cls-2{fill:#48addf;}.cls-3{fill:#56beee;}.cls-4{fill:#388bbd;}.cls-5{fill:#409ccb;}.cls-6{fill:#c2e1e1;}.cls-7{fill:#d7f2f2;}.cls-8{fill:#46b0d7;}.cls-9{fill:#58c8f1;}</style>
+  </defs>
+  <title
+     id="title6">docker</title>
+  <g
+     id="image"
+     transform="matrix(1.2033694,0,0,1.2033694,-7.2202164,-140.55355)">
+    <path
+       id="background"
+       class="cls-1"
+       d="m 344.4,221.7 h 52.5 v 53.7 h 26.5 a 115.9582,115.9582 0 0 0 36.5,-6.1 95.7112,95.7112 0 0 0 17.7,-8 c -7.4,-9.6 -11.2,-21.9 -12.3,-33.9 -1.5,-16.4 1.8,-37.7 12.9,-50.5 l 5.5,-6.4 6.6,5.3 c 16.5,13.3 30.5,31.9 32.9,53.1 20,-5.9 43.4,-4.5 60.9,5.7 l 7.2,4.1 -3.8,7.4 c -14.8,29 -45.9,38 -76.3,36.4 C 465.8,395.6 366.9,449.2 247,449.2 185,449.2 128.2,426 95.8,371 l -0.5,-0.9 -4.7,-9.6 C 79.7,336.3 76,309.8 78.5,283.3 l 0.8,-8 h 44.8 v -53.7 h 52.5 v -52.3 h 104.9 v -52.5 h 62.9 v 104.9"
+       inkscape:connector-curvature="0"
+       style="fill:#354750" />
+    <g
+       id="whale">
+      <path
+         id="body"
+         class="cls-2"
+         d="m 514.4,241.6 c 3.5,-27.3 -16.9,-48.9 -29.6,-59 -14.6,16.9 -16.9,61.3 6.1,79.8 -12.8,11.4 -39.8,21.7 -67.4,21.7 H 87.2 c -2.7,28.8 2.4,55.4 14,78.2 l 3.8,7 a 137.3464,137.3464 0 0 0 8,11.9 v 0 c 13.9,0.9 26.5,1.2 38.2,1 v 0 c 22.9,-0.5 41.6,-3.2 55.7,-8.2 a 4.0162171,4.0162171 0 0 1 2.6,7.6 c -1.9,0.7 -3.8,1.3 -5.9,1.9 v 0 a 183.9651,183.9651 0 0 1 -38.5,6.3 c 0.9,0 -1,0.1 -1,0.1 -0.5,0 -1.2,0.1 -1.7,0.1 -6.1,0.3 -12.7,0.4 -19.4,0.4 -7.4,0 -14.6,-0.1 -22.6,-0.6 l -0.2,0.1 c 28,31.5 71.9,50.3 126.7,50.3 116.2,0 214.8,-51.5 258.5,-167.1 31,3.1 60.8,-4.7 74.2,-31.2 -21.4,-12.3 -49.2,-8.3 -65.2,-0.3"
+         inkscape:connector-curvature="0"
+         style="fill:#48addf" />
+      <path
+         id="highlight"
+         class="cls-3"
+         d="m 514.4,241.6 c 3.5,-27.3 -16.9,-48.9 -29.6,-59 -14.6,16.9 -16.9,61.3 6.1,79.8 -12.8,11.4 -39.8,21.7 -67.4,21.7 H 107.1 c -1.4,44.1 15,77.7 44,97.9 v 0 c 22.9,-0.5 41.6,-3.2 55.7,-8.2 a 4.0162171,4.0162171 0 0 1 2.6,7.6 c -1.9,0.7 -3.8,1.3 -5.9,1.9 v 0 a 194.0616,194.0616 0 0 1 -39.6,6.6 l -0.4,-0.4 c 39.5,20.3 96.9,20.3 162.6,-5 73.7,-28.3 142.4,-82.3 190.2,-144 a 8.6275,8.6275 0 0 1 -1.9,1.1"
+         inkscape:connector-curvature="0"
+         style="fill:#56beee" />
+      <path
+         id="underwater"
+         class="cls-4"
+         d="m 87.8,319.2 a 135.3708,135.3708 0 0 0 13.3,43.1 l 3.8,7 a 137.3463,137.3463 0 0 0 8,11.9 c 13.9,0.9 26.5,1.2 38.2,1 22.9,-0.5 41.6,-3.2 55.7,-8.2 a 4.0162171,4.0162171 0 0 1 2.6,7.6 c -1.9,0.7 -3.8,1.3 -5.9,1.9 v 0 a 187.2977,187.2977 0 0 1 -39.5,6.4 13.4012,13.4012 0 0 0 -2,0.1 c -6.1,0.3 -12.6,0.6 -19.3,0.6 -7.4,0 -14.8,-0.1 -22.9,-0.6 28,31.5 72.1,50.4 127,50.4 99.5,0 186,-37.8 236.4,-121.2 H 87.8"
+         inkscape:connector-curvature="0"
+         style="fill:#388bbd" />
+      <path
+         id="underwater-highlight"
+         class="cls-5"
+         d="m 110.1,319.2 c 6,27.1 20.3,48.4 41,62.9 22.9,-0.5 41.6,-3.2 55.7,-8.2 a 4.0162171,4.0162171 0 0 1 2.6,7.6 c -1.9,0.7 -3.8,1.3 -5.9,1.9 v 0 a 190.3854,190.3854 0 0 1 -39.8,6.4 c 39.5,20.3 96.7,20 162.5,-5.3 39.8,-15.2 78.1,-38 112.4,-65.5 H 110.1"
+         inkscape:connector-curvature="0"
+         style="fill:#409ccb" />
+      <path
+         id="beard"
+         class="cls-6"
+         d="m 261.2,440.1 c -31.1,-14.7 -48.1,-34.8 -57.6,-56.6 -11.5,3.3 -25.4,5.4 -41.5,6.3 -6.1,0.3 -12.5,0.5 -19.2,0.5 -7.8,0 -15.8,-0.2 -24.4,-0.7 28.5,28.5 63.5,50.4 128.4,50.8 4.9,0 9.6,-0.1 14.3,-0.3"
+         inkscape:connector-curvature="0"
+         style="fill:#c2e1e1" />
+      <path
+         id="beard-highlight"
+         class="cls-7"
+         d="m 215.2,403.6 a 104.8035,104.8035 0 0 1 -11.5,-20.2 c -11.5,3.3 -25.5,5.4 -41.6,6.3 11,6.1 27,11.7 53.1,13.9"
+         inkscape:connector-curvature="0"
+         style="fill:#d7f2f2" />
+      <g
+         id="eye">
+        <path
+           id="white"
+           class="cls-7"
+           d="m 227.9,349.8 a 12.6,12.6 0 1 1 -12.6,12.6 12.6112,12.6112 0 0 1 12.6,-12.6"
+           inkscape:connector-curvature="0"
+           style="fill:#d7f2f2" />
+        <path
+           id="pupil"
+           class="cls-1"
+           d="m 227.9,353.3 a 7.9434,7.9434 0 0 1 3.2,0.6 3.7555,3.7555 0 0 0 -1.9,3.1 3.5841,3.5841 0 0 0 3.6,3.6 3.661,3.661 0 0 0 3.2,-1.9 10.3228,10.3228 0 0 1 0.7,3.4 8.9,8.9 0 1 1 -17.8,0 9.0532,9.0532 0 0 1 9,-8.8"
+           inkscape:connector-curvature="0"
+           style="fill:#354750" />
+      </g>
+    </g>
+    <path
+       id="water"
+       class="cls-1"
+       d="m 6,323.7 h 583.6 c -12.7,-3.2 -40.2,-7.6 -35.7,-24.2 -23.1,26.7 -78.9,18.8 -92.9,5.6 -15.6,22.7 -106.9,14.1 -113.2,-3.6 -19.7,23 -80.4,23 -100.1,0 -6.4,17.7 -97.5,26.3 -113.2,3.6 -14.1,13.2 -69.8,21.1 -92.9,-5.6 4.6,16.6 -22.9,21.1 -35.6,24.2"
+       inkscape:connector-curvature="0"
+       style="fill:#354750" />
+    <g
+       id="containers">
+      <polygon
+         class="cls-8"
+         points="178.3,230.5 178.3,276 132.8,276 132.8,230.5 "
+         id="polygon20"
+         style="fill:#46b0d7" />
+      <rect
+         class="cls-8"
+         x="185.2"
+         y="178.10001"
+         width="45.5"
+         height="45.5"
+         id="rect22"
+         style="fill:#46b0d7" />
+      <rect
+         class="cls-9"
+         x="185.2"
+         y="230.5"
+         width="45.5"
+         height="45.5"
+         id="rect24"
+         style="fill:#58c8f1" />
+      <rect
+         class="cls-8"
+         x="237.7"
+         y="230.5"
+         width="45.5"
+         height="45.5"
+         id="rect26"
+         style="fill:#46b0d7" />
+      <rect
+         class="cls-9"
+         x="237.7"
+         y="178.10001"
+         width="45.5"
+         height="45.5"
+         id="rect28"
+         style="fill:#58c8f1" />
+      <rect
+         class="cls-9"
+         x="290.20001"
+         y="230.5"
+         width="45.5"
+         height="45.5"
+         id="rect30"
+         style="fill:#58c8f1" />
+      <rect
+         class="cls-8"
+         x="290.20001"
+         y="178.10001"
+         width="45.5"
+         height="45.5"
+         id="rect32"
+         style="fill:#46b0d7" />
+      <rect
+         class="cls-9"
+         x="290.20001"
+         y="125.6"
+         width="45.5"
+         height="45.5"
+         id="rect34"
+         style="fill:#58c8f1" />
+      <rect
+         class="cls-8"
+         x="342.70001"
+         y="230.5"
+         width="45.5"
+         height="45.5"
+         id="rect36"
+         style="fill:#46b0d7" />
+      <g
+         id="grid1">
+        <polygon
+           class="cls-1"
+           points="350.1,234.3 350.1,272.2 346.5,272.2 346.5,234.3 "
+           id="polygon38"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="357,234.3 357,272.2 353.3,272.2 353.3,234.3 "
+           id="polygon40"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="363.9,234.3 363.9,272.2 360.1,272.2 360.1,234.3 "
+           id="polygon42"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="370.8,234.3 370.8,272.2 367,272.2 367,234.3 "
+           id="polygon44"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="377.7,234.3 377.7,272.2 373.9,272.2 373.9,234.3 "
+           id="polygon46"
+           style="fill:#354750" />
+        <polyline
+           class="cls-1"
+           points="380.8 234.3 384.4 234.3 384.4 272.2 380.8 272.2 380.8 234.3"
+           id="polyline48"
+           style="fill:#354750" />
+      </g>
+      <g
+         id="grid2">
+        <rect
+           class="cls-1"
+           x="294"
+           y="129.3"
+           width="3.5"
+           height="37.900002"
+           id="rect51"
+           style="fill:#354750" />
+        <rect
+           class="cls-1"
+           x="300.79999"
+           y="129.3"
+           width="3.7"
+           height="37.900002"
+           id="rect53"
+           style="fill:#354750" />
+        <rect
+           class="cls-1"
+           x="307.60001"
+           y="129.3"
+           width="3.7"
+           height="37.900002"
+           id="rect55"
+           style="fill:#354750" />
+        <rect
+           class="cls-1"
+           x="314.5"
+           y="129.3"
+           width="3.7"
+           height="37.900002"
+           id="rect57"
+           style="fill:#354750" />
+        <rect
+           class="cls-1"
+           x="321.39999"
+           y="129.3"
+           width="3.7"
+           height="37.900002"
+           id="rect59"
+           style="fill:#354750" />
+        <polyline
+           class="cls-1"
+           points="328.3 129.3 331.9 129.3 331.9 167.3 328.3 167.3 328.3 129.3"
+           id="polyline61"
+           style="fill:#354750" />
+      </g>
+      <g
+         id="grid3">
+        <rect
+           class="cls-1"
+           x="294"
+           y="181.8"
+           width="3.5"
+           height="37.900002"
+           id="rect64"
+           style="fill:#354750" />
+        <rect
+           class="cls-1"
+           x="300.79999"
+           y="181.8"
+           width="3.7"
+           height="37.900002"
+           id="rect66"
+           style="fill:#354750" />
+        <rect
+           class="cls-1"
+           x="307.60001"
+           y="181.8"
+           width="3.7"
+           height="37.900002"
+           id="rect68"
+           style="fill:#354750" />
+        <rect
+           class="cls-1"
+           x="314.5"
+           y="181.8"
+           width="3.7"
+           height="37.900002"
+           id="rect70"
+           style="fill:#354750" />
+        <rect
+           class="cls-1"
+           x="321.39999"
+           y="181.8"
+           width="3.7"
+           height="37.900002"
+           id="rect72"
+           style="fill:#354750" />
+        <polyline
+           class="cls-1"
+           points="328.3 181.8 331.9 181.8 331.9 219.8 328.3 219.8 328.3 181.8"
+           id="polyline74"
+           style="fill:#354750" />
+      </g>
+      <g
+         id="grid4">
+        <polygon
+           class="cls-1"
+           points="297.6,234.3 297.6,272.2 294,272.2 294,234.3 "
+           id="polygon77"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="304.5,234.3 304.5,272.2 300.8,272.2 300.8,234.3 "
+           id="polygon79"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="311.4,234.3 311.4,272.2 307.6,272.2 307.6,234.3 "
+           id="polygon81"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="318.3,234.3 318.3,272.2 314.5,272.2 314.5,234.3 "
+           id="polygon83"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="325.1,234.3 325.1,272.2 321.4,272.2 321.4,234.3 "
+           id="polygon85"
+           style="fill:#354750" />
+        <polyline
+           class="cls-1"
+           points="328.3 234.3 331.9 234.3 331.9 272.2 328.3 272.2 328.3 234.3"
+           id="polyline87"
+           style="fill:#354750" />
+      </g>
+      <g
+         id="grid5">
+        <rect
+           class="cls-1"
+           x="241.60001"
+           y="181.8"
+           width="3.5"
+           height="37.900002"
+           id="rect90"
+           style="fill:#354750" />
+        <rect
+           class="cls-1"
+           x="248.3"
+           y="181.8"
+           width="3.7"
+           height="37.900002"
+           id="rect92"
+           style="fill:#354750" />
+        <rect
+           class="cls-1"
+           x="255.10001"
+           y="181.8"
+           width="3.7"
+           height="37.900002"
+           id="rect94"
+           style="fill:#354750" />
+        <rect
+           class="cls-1"
+           x="262"
+           y="181.8"
+           width="3.7"
+           height="37.900002"
+           id="rect96"
+           style="fill:#354750" />
+        <rect
+           class="cls-1"
+           x="269"
+           y="181.8"
+           width="3.7"
+           height="37.900002"
+           id="rect98"
+           style="fill:#354750" />
+        <polyline
+           class="cls-1"
+           points="275.9 181.8 279.4 181.8 279.4 219.8 275.9 219.8 275.9 181.8"
+           id="polyline100"
+           style="fill:#354750" />
+      </g>
+      <g
+         id="grid6">
+        <polygon
+           class="cls-1"
+           points="245.1,234.3 245.1,272.2 241.6,272.2 241.6,234.3 "
+           id="polygon103"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="252,234.3 252,272.2 248.3,272.2 248.3,234.3 "
+           id="polygon105"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="258.9,234.3 258.9,272.2 255.1,272.2 255.1,234.3 "
+           id="polygon107"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="265.8,234.3 265.8,272.2 262,272.2 262,234.3 "
+           id="polygon109"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="272.7,234.3 272.7,272.2 269,272.2 269,234.3 "
+           id="polygon111"
+           style="fill:#354750" />
+        <polyline
+           class="cls-1"
+           points="275.9 234.3 279.4 234.3 279.4 272.2 275.9 272.2 275.9 234.3"
+           id="polyline113"
+           style="fill:#354750" />
+      </g>
+      <g
+         id="grid7">
+        <polygon
+           class="cls-1"
+           points="192.6,234.3 192.6,272.2 189.1,272.2 189.1,234.3 "
+           id="polygon116"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="199.6,234.3 199.6,272.2 195.9,272.2 195.9,234.3 "
+           id="polygon118"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="206.5,234.3 206.5,272.2 202.7,272.2 202.7,234.3 "
+           id="polygon120"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="213.4,234.3 213.4,272.2 209.6,272.2 209.6,234.3 "
+           id="polygon122"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="220.2,234.3 220.2,272.2 216.5,272.2 216.5,234.3 "
+           id="polygon124"
+           style="fill:#354750" />
+        <polyline
+           class="cls-1"
+           points="223.4 234.3 226.9 234.3 226.9 272.2 223.4 272.2 223.4 234.3"
+           id="polyline126"
+           style="fill:#354750" />
+      </g>
+      <g
+         id="grid8">
+        <rect
+           class="cls-1"
+           x="189.10001"
+           y="181.8"
+           width="3.5"
+           height="37.900002"
+           id="rect129"
+           style="fill:#354750" />
+        <rect
+           class="cls-1"
+           x="195.89999"
+           y="181.8"
+           width="3.7"
+           height="37.900002"
+           id="rect131"
+           style="fill:#354750" />
+        <rect
+           class="cls-1"
+           x="202.7"
+           y="181.8"
+           width="3.7"
+           height="37.900002"
+           id="rect133"
+           style="fill:#354750" />
+        <rect
+           class="cls-1"
+           x="209.60001"
+           y="181.8"
+           width="3.7"
+           height="37.900002"
+           id="rect135"
+           style="fill:#354750" />
+        <rect
+           class="cls-1"
+           x="216.5"
+           y="181.8"
+           width="3.7"
+           height="37.900002"
+           id="rect137"
+           style="fill:#354750" />
+        <polyline
+           class="cls-1"
+           points="223.4 181.8 226.9 181.8 226.9 219.8 223.4 219.8 223.4 181.8"
+           id="polyline139"
+           style="fill:#354750" />
+      </g>
+      <g
+         id="grid9">
+        <polygon
+           class="cls-1"
+           points="140.2,234.3 140.2,272.2 136.6,272.2 136.6,234.3 "
+           id="polygon142"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="147.1,234.3 147.1,272.2 143.4,272.2 143.4,234.3 "
+           id="polygon144"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="154,234.3 154,272.2 150.2,272.2 150.2,234.3 "
+           id="polygon146"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="160.9,234.3 160.9,272.2 157.1,272.2 157.1,234.3 "
+           id="polygon148"
+           style="fill:#354750" />
+        <polygon
+           class="cls-1"
+           points="167.7,234.3 167.7,272.2 164,272.2 164,234.3 "
+           id="polygon150"
+           style="fill:#354750" />
+        <polyline
+           class="cls-1"
+           points="170.9 234.3 174.5 234.3 174.5 272.2 170.9 272.2 170.9 234.3"
+           id="polyline152"
+           style="fill:#354750" />
+      </g>
+    </g>
+  </g>
+</svg>

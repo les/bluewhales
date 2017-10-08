@@ -1,0 +1,46 @@
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  text-transform: none;
+  font-style: italic;
+  margin: 0 0 32px 0;
+}
+
+.author small {
+  color: #606060;
+  font-size: 0.8em;
+  font-style: italic;
+}
+
+.smallprint {
+  color: #606060;
+  font-size: 0.6em !important;
+  font-style: italic;
+}
+
+.reveal section img {
+  border: 0;
+  box-shadow: none;
+}
+
+/* element+element selector; select .title elements placed immediately after (not inside) .imageblock elements  */
+.imageblock + .title {
+  color: #606060;
+  font-size: 0.6em;
+  font-style: italic;
+}
+
+.reveal pre code {
+  max-height: 700px;
+}
+
+.credits {
+  display: block;
+  padding: 5px;
+  overflow: auto;
+  max-height: 700px;
+  word-wrap: normal;
+}
+
+.credits ul {
+  list-style-type: none;
+  margin: 0;
+}

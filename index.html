@@ -1,0 +1,346 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="author" content="https://github.com/les"><meta name="copyright" content="CC BY-SA 4.0"><title>Blue Whales on ECStasy</title><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" name="viewport"><link href="reveal.js/css/reveal.css" rel="stylesheet"><link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme"><link href="reveal.js/lib/css/grayscale.css" rel="stylesheet"><script>document.write( '<link rel="stylesheet" href="reveal.js/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );</script><link rel="stylesheet" href="README/custom.css"></head><body><div class="reveal"><div class="slides"><section class="title" data-state="title"><h1>Blue Whales on ECStasy</h1><p class="author"><small>https://github.com/les</small></p></section><section id="_disclaimer"><h2>Disclaimer</h2><div class="paragraph"><p>In the interests of time, this talk will be quite high-level and does not aim to teach you everything you need to know about Amazon ECS; however, it assumes at least a basic knowledge of AWS and Docker.</p></div>
+<div class="paragraph"><p><a href="https://github.com/les/bluewhales">This document</a> (<a href="https://les.github.io/bluewhales/">and resulting slide deck</a>) is intentionally dense, so you (and others) can use it for future reference.</p></div>
+<div class="paragraph"><p>Kate Libby (a.k.a Acid Burn) considers me <code>31337</code>; however, I don&#8217;t work for Amazon and things change, so please do your own research and make your decisions.</p></div></section>
+<section><div class="paragraph"><p>THE DOCUMENT IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE INFORMATION CONTAINED WITHIN.</p></div></section>
+<section id="_aim"><h2>Aim</h2><div class="paragraph"><p>What if I said, I could help reduce your AWS spend by up to 75%?<sup>*</sup></p></div>
+<div class="paragraph smallprint"><p><sup>*</sup>Average figure based on several simulated test cases, your mileage my vary.</p></div></section>
+<section id="_but_before_we_get_into_that_let_s_tackle_the_small_issue_of_the_title"><h2>But before we get into that, let&#8217;s tackle the small issue of the title.</h2></section>
+<section id="_what_are_blue_whales"><h2>What are blue whales?</h2><div class="ulist"><ul><li><p>Up to 98ft (30m) in length and with a maximum recorded weight of 173t (173,000kg), the blue whale (Balaenoptera musculus) is the largest animal known to have ever existed.</p></li><li><p>A blue whale&#8217;s tongue weighs as much as an elephant and their heart is 640x heavier than ours.</p></li><li><p>A blue whale&#8217;s call is louder than a jumbo jet (at take-off) and can be heard from over 500mi (805km) away.</p></li><li><p>Blue whales eat an elephant every day, but they can only swallow a grapefruit.</p></li><li><p>A blue whale&#8217;s age can be determined by its earwax.</p></li><li><p>The average lifespan of a blue whale is 80-90 years, but the oldest one recorded (based on it&#8217;s earwax) was ~110yo.</p></li></ul></div>
+<aside class="notes"><div class="paragraph"><p>Gravity limits the size of land animals to what their skeletons can support.
+The African elephant (Loxodonta), is the largest/heaviest land animal; males stand up to 13ft (4.0m) tall at the shoulder and can weigh up to 6t (6,000kg).</p></div>
+<div class="paragraph"><p>Land animals need to use their skeleton and muscles to support their body mass against the force of gravity (an elephant&#8217;s skeleton comprises 27% of its body weight), whereas marine mammals are supported by the buoyant force of salt water (a blue whale&#8217;s skeleton only comprises 15% of its body weight).</p></div>
+<div class="paragraph"><p>Sadly, if you were to remove a blue whale from the ocean it would be crushed to death under its own weight a result of the effects of gravity.</p></div>
+<div class="paragraph"><p>A blue whale&#8217;s heart weighs about 640 times as much as a human heart.</p></div>
+<div class="paragraph"><p>Blue whales have one of the loudest calls in the animal kingdom, measuring up to 188dB, their song is louder than a jumbo jet at take-off (140dB) .</p></div>
+<div class="paragraph"><p>For 8 months of the year, blue whales eat virtually nothing, but during the summer months they feed almost continuously, scooping up 4-8t (4,000-8,000kg) of krill every day.</p></div>
+<div class="paragraph"><p>A blue whale&#8217;s throat is almost exactly the same diameter as its belly button (roughly the size of a side plate), but a little smaller than its eardrum (roughly the size of a dinner plate).</p></div>
+<div class="paragraph"><p>About every 6 months a new layer of wax forms inside a whale&#8217;s ear canal.
+The wax primarily services to protect the ear canal and counterintuitively helps carry sound waves into the whale&#8217;s inner ear.
+This build up of wax layers, called an earplug, can be measured and used to estimate a whale&#8217;s age, much like counting the rings in a tree trunk.</p></div></aside></section>
+<section><div class="imageblock" style=""><img src="README/animal-size-comparison.jpg" alt="Animal Size Comparison"></div><div class="title">Courtesy of <a href="https://sameerprehistorica.deviantart.com/">SameerPrehistorica @ DeviantArt</a></div></section>
+<section id="_what_is_ecstasy"><h2>What is ecstasy?</h2><div class="ulist"><ul><li><p>3,4-Methylenedioxymethamphetamine (MDMA), commonly referred to as ecstasy or E, is a psychoactive compound used primarily as a recreational drug.</p></li><li><p>Desired effects include increased empathy, euphoria, and heightened sensations.</p></li><li><p>Adverse effects include addiction, memory problems, paranoia, difficulty sleeping, teeth grinding, blurred vision, sweating and a rapid heartbeat.</p></li><li><p>Effects begin 30-45 minutes after ingestion and last 3-6 hours.</p></li><li><p>Street ecstasy (pill form) is usually coloured and stamped with different logos (e.g. Macintosh, 007, Superman, Playboy, Mitsubishi, Rolls Royce, etc.).</p></li><li><p>As of 2017, MDMA has no accepted medical uses.</p></li></ul></div></section>
+<section id="__that_s_great_but_what_s_all_this_got_to_do_with_a_docker_meetup"><h2>"That&#8217;s great, but what&#8217;s all this got to do with a Docker Meetup?"</h2></section>
+<section><div class="imageblock" style=""><img src="README/moby-dock.svg" alt="Moby Dock"></div><div class="title">Courtesy of <a href="https://www.docker.com/">Docker, Inc.</a></div>
+<div class="paragraph"><p>Docker&#8217;s logo is a blue whale named Moby Dock, hence the <a href="https://github.com/moby">Moby Project</a>.</p></div>
+<aside class="notes"><div class="paragraph"><p>Docker, Inc. (the company) decided to differentiate Docker&#8217;s commercial software products (Docker Community Edition, Docker Enterprise Edition, Docker Cloud, etc.) from the free (<a href="https://www.gnu.org/philosophy/free-sw.en.html">as in freedom</a>) Docker source code by renaming it to the <a href="https://mobyproject.org/">Moby Project</a>.</p></div></aside></section>
+<section><div class="imageblock" style=""><img src="README/molly-dock.jpg" alt="Molly Dock"></div><div class="title">Courtesy of <a href="https://blog.docker.com/2015/02/docker-project-announces-open-source-a-thon-to-support-whale-and-marine-wildlife-conservation/">Docker, Inc.</a></div>
+<div class="paragraph"><p>In February 2015 as part of their 2nd birthday celebrations, Docker donated $25,000 to the <a href="http://www.oceanicsociety.org/">Oceanic Society, California</a> to adopt a female blue whale (#763), which they named Molly Dock<sup>*</sup>.</p></div>
+<div class="paragraph smallprint"><p><sup>*</sup>Thankfully, Docker employees have no official responsibilities in taking care of the whale.</p></div>
+<aside class="notes"><div class="paragraph"><p>#763 was named Molly Dock, so that the blue whale in Docker&#8217;s logo, named Moby Dock, would have a female companion.</p></div>
+<div class="paragraph"><p>Roderic Mast, president of the Oceanic Society, also organised a whale watching trip with Docker employees; although, there&#8217;s no evidence to suggest any of them have every actually seen Molly Dock.</p></div></aside></section>
+<section id="__so_that_s_the_blue_whales_what_about_the_ecstasy"><h2>"So that&#8217;s the blue whales, what about the ecstasy?"</h2></section>
+<section id="_well_like_ecstasy_amazon_ec2_container_service_amazon_ecs_will_make_you_and_your_boss_very_happy"><h2>Well, like ECStasy, Amazon EC2 Container Service (Amazon ECS) will make you (and your boss) very happy!</h2></section>
+<section id="_how"><h2>How?</h2></section>
+<section id="_by_saving_you"><h2>By saving you $$$!</h2><aside class="notes"><div class="paragraph"><p>Conveniently E, C and S are also the first three letters making up the word ecstasy.</p></div></aside></section>
+<section id="_what_is_docker"><h2>What is Docker?</h2><div class="paragraph"><p>You can think of Docker as chroot(1) on steroids<sup>*</sup>.</p></div>
+<div class="paragraph smallprint"><p><sup>*</sup>YADR (Yet Another Drug Reference), this time used by Klaus Schmidt to describe Solaris Containers Zones in his book High Availability and Disaster Recovery: Concepts, Design, Implementation (Springer-Verlag, 2006).</p></div>
+<aside class="notes"><div class="paragraph"><p>Chroot is an operation that changes the apparent root directory of a running process to isolate it and its children from the rest of the system; thus a chrooted program cannot access files and commands outside of it&#8217;s directory tree.
+This modified environment is called a chroot jail (which is likely where you will go if buy/sell drugs).
+They can only be used for processes that do not run as root, since root users can easily break out of a chroot jail by chrooting back to <code>/</code>.</p></div></aside></section>
+<section><div class="imageblock" style=""><img src="README/vm-vs-c8.png" alt="Virtual Machines vs. Containers" height="800"></div><div class="title">Courtesy of <a href="http://dockerdocs.org/what-is-docker/">Docker Docs</a></div>
+<aside class="notes"><div class="paragraph"><p>You all should recognise this, but for those of you who don&#8217;t.</p></div></aside></section>
+<section id="_what_is_ecs"><h2>What is ECS?</h2><div class="paragraph"><p>Before we look at ECS we need to explore a few other things first, like how Amazon makes all of its money though people like you!</p></div></section>
+<section id="_the_a_href_http_fortune_com_global500_global_500_a_ranks_amazon_135_9b_2016_fy_the_world_s_3rd_s_largest_technology_company_by_revenue_after_samsung_215_6b_2016_fy_and_apple_215_1b_2016_fy"><h2>The <a href="http://fortune.com/global500">Global 500</a> ranks Amazon ($135.9B, 2016 FY) the world&#8217;s 3rd&#8217;s largest technology company (by revenue) after Samsung ($215.6B, 2016 FY) and Apple ($215.1B, 2016 FY).</h2><aside class="notes"><div class="paragraph"><p>The Fortune Global 500 (a.k.a. the Global 500) is an annual ranking of the top 500 corporations worldwide as measured by revenue.
+The list is compiled and published annually by <a href="https://en.wikipedia.org/wiki/Fortune_(magazine)">Fortune magazine</a>.</p></div>
+<div class="paragraph"><p>Revenue (a.k.a. turnover), is the income that a business has from its normal business activities (usually from the sale of goods and services to customers) during a given period.
+Profit (a.k.a. net income), generally implies total revenue minus total expenses in a given period.
+In accounting, revenue is referred to as <em>"the top line"</em>, due to its position on the income statement; whereas, profit is referred to a as <em>"the bottom line"</em>, which denotes net income (i.e. gross revenues minus total expenses).</p></div>
+<div class="paragraph"><p>A fiscal year (a.k.a. financial year) is the period used by governments for accounting and budget purposes, which vary between countries.
+It is also used for financial reporting by business and other organizations.</p></div></aside></section>
+<section id="_so_how_does_amazon_make_all_this_money"><h2>So, how does Amazon make all this money?</h2><div class="ulist"><ul><li class="fragment"><p>Retail goods?</p></li><li class="fragment"><p>Digital content?</p></li><li class="fragment"><p>Consumer electronics?</p></li><li class="fragment"><p>Jeremy Clarkson, Richard Hammond &amp; James May?</p></li><li class="fragment"><p>Over-provisioning on EC2?</p></li></ul></div>
+<aside class="notes"><div class="ulist"><div class="title">Retails goods</div><ul><li><p>Amazon Retail</p></li></ul></div>
+<div class="ulist"><div class="title">Digital content</div><ul><li><p>Amazon Prime</p></li><li><p>Amazon Music</p></li><li><p>Amazon Games</p></li></ul></div>
+<div class="ulist"><div class="title">Consumer electronics</div><ul><li><p>Amazon Kindle</p></li><li><p>Amazon Fire</p></li><li><p>Amazon Echo/Dot</p></li></ul></div>
+<div class="ulist"><div class="title">Jeremy Clarkson, Richard Hammond &amp; James May</div><ul><li><p>The Grand Tour</p></li></ul></div>
+<div class="ulist"><div class="title">Over-provisioning on EC2?</div><ul><li><p>With some help from the microservices trend</p></li></ul></div></aside></section>
+<section id="_let_s_quickly_talk_about_microservices"><h2>Let&#8217;s quickly talk about microservices</h2><div class="paragraph"><p>Microservices is an evolution of SOA, whereby large software applications are broken down into a collection of small, modular, loosely-coupled and independently-deployable services that communicates with one another through well-defined, lightweight protocols/APIs.</p></div>
+<div class="paragraph"><p>Decomposing a typically large application into small, functionally-unique microservices, improves modularity and helps makes applications easier to understand, develop, refactor, test and scale (in isolation).</p></div></section>
+<section id="_microservices_have_a_few_drawbacks_though"><h2>Microservices have a few drawbacks though&#8230;&#8203;</h2><div class="olist arabic"><ol class="arabic"><li><p>Viewing size as the primary structuring mechanism can lead to too many services when the alternative of internal modularisation may result in an overall simpler design.</p></li><li><p>Microservices that are too fine-grained are an anti-pattern, i.e. where the overhead outweighs the utility.</p></li><li><p>Moving responsibilities between services can be more difficult, i.e. transfer of knowledge between teams, use of multiple programming languages, etc.</p></li><li><p>Remote calls (over the network) are more expensive (e.g. network latency, message processing, etc.) than in-process calls.</p></li><li><p>Which also introduces additional complexity and new problems, such as network latency, message formats, load balancing and fault tolerance, etc.</p></li><li><p>Deployment and integration testing also become more complicated.</p></li></ol></div>
+<div class="paragraph smallprint"><p>To mention a few.</p></div></section>
+<section><div class="quoteblock"><blockquote><div class="paragraph"><p>You can move it about but it&#8217;s still there!</p></div></blockquote><div class="attribution"><cite>Where is the complexity? (2014-05-01)</cite><br>&#8212; Robert Annett</div></div>
+<aside class="notes"><div class="paragraph"><p>The complexity of a monolithic application is only shifted into the network, but still persists.</p></div></aside></section>
+<section id="_so_you_invest_time_resources_into_benchmarking_your_application_only_to_find_that_a_t2_nano_t2_micro_is_too_big_for_a_single_microservice"><h2>So, you invest time/resources into benchmarking your application only to find that a t2.nano/t2.micro is too big for a single microservice!</h2><aside class="notes"><div class="paragraph"><p>Determining the ideal instance size for your application is a challenge in any environment, not just in a microservices one, so you&#8217;ll almost always be over-provisioning your compute.</p></div></aside></section>
+<section id="_and_you_can_t_go_down_so_you_trade_utilisation_for_ha"><h2>And you can&#8217;t go down, so you trade utilisation for HA!</h2></section>
+<section id="_look_for_the_bare_necessities"><h2>Look for the bare necessities&#8230;&#8203;</h2><div class="paragraph"><p>1 region<br>
+~3 envs (dev, qa &amp; prod)<br>
+&gt;1 AZ (for HA)<br>
+&gt;= 1 ec2 per AZ (min 2)</p></div>
+<aside class="notes"><div class="paragraph"><p>Let&#8217;s pretend you&#8217;ve got 3 environments and to maintain some sort of HA, you need at least 1 EC2 instance in at least 2 AZs per environment.</p></div>
+<div class="paragraph"><p>The reality is, most of us are in 3 AZs and multiple regions (particularly in production), but let&#8217;s use this as an example.</p></div></aside></section>
+<section id="_les_law"><h2>Les' Law</h2><div class="paragraph"><p><br></p></div>
+<div class="paragraph"><p><strong><em>m = e * az * opec2</em></strong></p></div>
+<div class="paragraph"><p><br></p></div>
+<div class="paragraph smallprint"><p>And for those who can&#8217;t do the maths&#8230;&#8203;</p></div>
+<div class="paragraph smallprint"><p>3 environments (<em>e</em>) x 2 availability zones (<em>az</em>) x 1 over-provisioned EC2 instances (<em>opec2</em>) = 6 over-provisioned EC2 instances per microservice (<em>m</em>)</p></div>
+<aside class="notes"><div class="paragraph"><p>Even when the service is not running under full load (highly likely in dev and qa), we&#8217;re using 6 over-provisioned EC2 instances to run just 1 microservice.</p></div></aside></section>
+<section id="_but_it_doesn_t_stop_there_because"><h2>But it doesn&#8217;t stop there, because&#8230;&#8203;</h2><div class="paragraph fragment"><p>You also have 1x CLB per microservice, per environment<sup>*</sup>!</p></div>
+<div class="paragraph fragment"><p><span class="smallprint"><sup>*</sup>Id est, you&#8217;re running multiple CLBs because you are hosting multiple applications (e.g. www.example.com, shop.example.com, unicorns.examples.com, etc.).</span></p></div></section>
+<section id="_actually_i_lied"><h2>Actually I lied&#8230;&#8203;</h2><div class="paragraph"><p>This isn&#8217;t my equation; someone at Amazon worked this out a long time ago, which (if you think back a few slides) is why Amazon is the world&#8217;s third largest technology company based on revenue.</p></div></section>
+<section id="_so_what_is_ecs"><h2>So, what is ECS?</h2><div class="paragraph"><p>Amazon EC2 Container Service (ECS) is a highly scalable, high performance container management platform that supports Docker containers and allows you to easily run applications on a managed cluster of EC2 instances.</p></div>
+<div class="paragraph"><p><a href="https://aws.amazon.com/about-aws/whats-new/2015/04/amazon-ec2-container-service-is-now-generally-available/">GA on 2015-04-09</a>.</p></div></section>
+<section id="_you_can_use_ecs_to_schedule_the_placement_of_containers_across_your_ec2_instances_based_on_your_resource_needs_isolation_policies_and_availability_requirements_so_you_can_strong_start_driving_up_your_utilisation_without_sacrificing_availability_strong"><h2>You can use ECS to schedule the placement of containers across your EC2 instances based on your resource needs, isolation policies and availability requirements, so you can <strong>start driving up your utilisation without sacrificing availability!</strong></h2></section>
+<section id="_ecs_is_elastic_so_it_allows_you_to_grow_from_a_single_container_on_a_single_instance_to_thousands_of_containers_across_hundreds_of_instances_hopefully_without_adding_too_much_additional_complexity"><h2>ECS is elastic, so it allows you to grow from a single container on a single instance to thousands of containers across hundreds of instances, hopefully without adding too much additional complexity.</h2></section>
+<section id="_ecs_eliminates_the_need_for_you_to_install_operate_and_scale_your_own_cluster_management_infrastructure_e_g_kubernetes_mesos_dc_os_swarm_etc"><h2>ECS eliminates the need for you to install, operate and scale your own cluster management infrastructure (e.g. Kubernetes, Mesos, DC/OS, Swarm, etc.).</h2></section>
+<section id="_and_because_it_s_on_aws_you_have_access_to_all_the_other_aws_services_that_you_re_already_familiar_with_e_g_ec2_vpc_elbs_ebs_efs_s3_security_groups_iam_cloudwatch_cloudtrail_x_ray_etc"><h2>And because it&#8217;s on AWS, you have access to all the other AWS services that you&#8217;re already familiar with (e.g. EC2, VPC, ELBs, EBS, EFS, S3, security groups, IAM, CloudWatch, CloudTrail, X-Ray, etc.).</h2></section>
+<section id="_you_can_also_integrate_your_own_third_party_schedulers_to_meet_your_specific_business_application_requirements"><h2>You can also integrate your own/third-party schedulers to meet your specific business/application requirements.</h2></section>
+<section id="_but_best_of_all_strong_there_s_no_additional_charge_for_ecs_strong_you_only_pay_for_the_aws_resources_e_g_ec2_instances_ebs_volumes_elbs_etc_you_use_and_hopefully_you_ll_be_using_a_lot_less_as_a_result"><h2>But best of all, <strong>there&#8217;s no additional charge for ECS</strong>; you only pay for the AWS resources (e.g. EC2 instances, EBS volumes, ELbs, etc.) you use (and hopefully you&#8217;ll be using a lot less as a result).</h2></section>
+<section id="_a_brief_look_at_beanstalk"><h2>A brief look at Beanstalk</h2><div class="paragraph"><p>Alternatively, you could look at Elastic Beanstalk (a PaaS layer over ECS) to rapidly deploy Docker containers on AWS; however, using ECS directly gives you more fine-grained control and access to a much wider set of use cases.</p></div></section>
+<section id="_ecs_key_concepts_components"><h2>ECS key concepts/components</h2><div class="ulist"><ul><li><p>EC2 Container Registry (ECR)</p></li><li><p>ECS Container Instance</p></li><li><p>ECS Cluster</p></li><li><p>ECS Task Definition</p></li><li><p>ECS Task</p></li><li><p>ECS Service</p></li><li><p>ECS Scheduler</p></li></ul></div></section>
+<section id="_ec2_container_registry_ecr"><h2>EC2 Container Registry (ECR)</h2><div class="paragraph"><p><strong>ECR is a AWS managed Docker registry similar to <a href="https://hub.docker.com/">Docker Hub</a>.</strong></p></div>
+<div class="ulist"><ul><li><p>ECR supports private Docker repositories with resource-based permissions using IAM, so only specific users/instances can access repositories/images.</p></li><li><p>Developers can use the standard Docker CLI to push, pull and manage images.</p></li><li><p>ECR storage costs $0.10GB/m and data transfer out (<code>docker pull</code>) costs $0.090GB/m for the first 10TB.</p></li><li><p>Data transfer in (<code>docker push</code>) is free.</p></li></ul></div></section>
+<section id="_ecs_container_instance"><h2>ECS Container Instance</h2><div class="paragraph"><p><strong>An ECS Container Instance is just an EC2 instance running the Docker daemon and the Amazon ECS container agent.</strong></p></div>
+<div class="ulist"><ul><li><p>The Amazon ECS container agent allows container instances to connect to your ECS cluster.</p></li><li><p>The source code for Amazon&#8217;s ECS container agent is available on <a href="https://github.com/aws/amazon-ecs-agent">GitHub</a> under Apache License, Version 2.0 and Amazon encourages PRs. Yay!</p></li><li><p>The ECS container agent is included in Amazon&#8217;s <a href="https://aws.amazon.com/marketplace/pp/B00U6QTYI2">ECS-Optimized Amazon Linux AMI</a> (Amazon EULA), but you can also install it on any EC2 instance that meets the <a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html">minimum requirements</a>.</p></li><li><p>Just like a regular EC2 instance (because that&#8217;s what it is), you can register your ECS container instances with an ASG within a VPC, attach EBS volumes and configure them to send logs to CloudWatch Logs, etc.</p></li></ul></div>
+<aside class="notes"><div class="paragraph"><p>The <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a> is a free software license, compatible with the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License, Version 3.0</a>.</p></div></aside></section>
+<section id="_ecs_cluster"><h2>ECS Cluster</h2><div class="paragraph"><p><strong>An ECS Cluster is just a logical group of EC2 instances (an EC2 resource pool) that you can place containers (a.k.a. tasks) on.</strong></p></div>
+<div class="ulist"><ul><li><p>When you first use ECS, a default cluster is created for you, but you can create multiple clusters in an account to keep your resources separate.</p></li><li><p>ECS clusters can contain multiple different EC2 instance sizes and types (on-demand, reserved, spot).</p></li><li><p>ECS clusters are region-specific.</p></li><li><p>ECS container instances can only be a part of one ECS cluster at a time.</p></li><li><p>You can create custom IAM policies for your ECS clusters to allow or restrict users.</p></li></ul></div></section>
+<section id="_ecs_task_definition"><h2>ECS Task Definition</h2><div class="paragraph"><p><strong>A ECS Task Definition describes the configuration of a single container or group of containers (e.g. which Docker image to use, what data volumes to attach and any ports to expose, etc.), similar to a <code>docker-compose.yml</code>.</strong></p></div>
+<div class="paragraph"><p>Some of the things you can configure in a task definition include:
+* Docker image(s) to use.
+* CPU and memory allocation per container.
+* Containers links.
+* Docker networking mode.
+* Port mappings (from the container to the host instance), if any.
+* The command the container should run when started, including any environment variables.
+* Any data volumes to mount.
+* IAM role to use.
+* Essential flag.</p></div>
+<aside class="notes"><div class="paragraph"><p>Your entire application stack does not need to exist in a single task definition and in most cases probably shouldn&#8217;t.</p></div></aside></section>
+<section id="_example_task_definition"><h2>Example Task Definition</h2><div class="listingblock"><div class="content"><pre class="highlight"><code class="json language-json">{
+      "family": "web-timer",
+      "containerDefinitions": [
+      {
+              "name": "web",
+              "image": "nginx",
+              "cpu": 99,
+              "memory": 100,
+              "portMappings": [{
+                      "containerPort": 80,
+                      "hostPort": 80
+              }],
+              "essential": true,
+              "mountPoints": [{
+                      "sourceVolume": "webdata",
+                      "containerPath": "/usr/share/nginx/html",
+                      "readOnly": true
+              }]
+      }, {
+              "name": "timer",
+              "image": "busybox",
+              "cpu": 10,
+              "memory": 20,
+              "entryPoint": ["sh", "-c"],
+              "command": ["while true; do date &gt; /nginx/index.html; sleep 1; done"],
+              "mountPoints": [{
+                      "sourceVolume": "webdata",
+                      "containerPath": "/nginx/"
+              }]
+      }],
+      "volumes": [{
+              "name": "webdata",
+              "host": {
+                      "sourcePath": "/ecs/webdata"
+              }}
+      ]
+}</code></pre></div></div>
+<div class="paragraph smallprint"><p>Courtesy of <a href="http://docs.aws.amazon.com/cli/latest/reference/ecs/register-task-definition.html">AWS CLI Command Reference</a></p></div>
+<aside class="notes"><div class="paragraph"><p><code>family</code> corresponds to the task definition name.</p></div>
+<div class="paragraph"><p><code>cpu</code> is the number of CPU units to reserve for the container.
+An ECS container instance has 1,024 CPU units for every CPU core (1024/100=10.24 rounded down because the CPU units field only supports integers).</p></div>
+<div class="paragraph"><p>Hard and soft limits correspond to the <code>memory</code> and <code>memoryReservation</code> respectively.
+If you specify a hard limit (<code>memory</code>), your container will be killed if it attempts to exceed that limit.
+If you specify a soft limit (<code>memoryReservation</code>), ECS reserves that amount of memory for your container; however, the container can request up to the hard limit (if specified) or all of the available memory on the container instance, whichever is reached first.
+If you specify both, the hard limit must be greater than the soft limit.</p></div>
+<div class="paragraph"><p>If <code>essential</code> is set to true, any failure of that container will stop the task.</p></div>
+<div class="paragraph"><p>Each time you update a task definition (e.g. to update the image tag/version), a new revision of the task definition is created to allow for easy rollback.</p></div>
+<div class="paragraph"><p>We&#8217;ll come onto why this is a bad example later, but for those who can&#8217;t wait&#8230;&#8203;
+If you use an ALB, you can set the <code>hostPort</code> to <code>0</code> to enable dynamic host port mapping, which allows you to run more than one copy of a task on a single ECS container instance!!!</p></div></aside></section>
+<section id="_ecs_task"><h2>ECS Task</h2><div class="paragraph"><p><strong>A Task is the running state of a task definition.</strong></p></div>
+<div class="ulist"><ul><li><p>When a task runs, the underlying container(s) start and when all the container processes end, the task ends.</p></li><li><p>Tasks can either be short-lived (i.e. batch jobs) or long-lived <em>services</em> (i.e. web apps).</p></li><li><p>All the containers comprising the same task run on the same EC2 instance.</p></li></ul></div></section>
+<section id="_ecs_service"><h2>ECS Service</h2><div class="paragraph"><p><strong>A service launches and maintains a desired count of copies of your task definition on your cluster.</strong></p></div>
+<div class="ulist"><ul><li><p>If any task in your service stops/failed/is killed, the service scheduler will launch another instance of your task definition to replace it.</p></li><li><p>By default, the service scheduler spreads tasks across AZs, but you can use task placement strategies and constraints to customise task placement decisions.</p></li><li><p>Optional deployment configuration (min/max healthy percent) controls how many tasks run during the deployment and the ordering of stopping and starting tasks.</p></li><li><p>The ECS Services scheduler can optionally register tasks with an ELB.</p></li></ul></div>
+<aside class="notes"><div class="paragraph"><p>A deployment is triggered by either updating the task definition or desired count of a service.</p></div></aside></section>
+<section id="_ecs_schedulers"><h2>ECS Schedulers</h2><div class="paragraph"><p><strong>A scheduler handles the logic of running tasks/containers on a cluster.</strong></p></div>
+<div class="paragraph"><p>Current scheduler options include:</p></div>
+<div class="ulist"><ul><li><p>Service scheduler, good for long-running tasks and applications (e.g. web servers).</p></li><li><p>Manually running tasks, good for batch jobs or one-off tasks (e.g. queue work).</p></li><li><p>You can also run tasks on a cron(8) schedule, via CloudWatch Events rules, for reoccurring batch jobs (e.g. backups).</p></li><li><p>Other third-party/custom schedulers, such as <a href="https://github.com/blox/blox">Blox</a> (Apache-2.0), for extra flexibility/control.</p></li></ul></div>
+<div class="paragraph"><p>Both the <code>RunTask</code> and <code>CreateService</code> actions allow you to specify task placement constraints (e.g. never run these 2 tasks on the same instance), and task placement strategies (i.e. binpack, random, spread) to customise how the ECS scheduler places your tasks.</p></div>
+<aside class="notes"><div class="paragraph"><p>If you would like tasks to run at set intervals, you can create a CloudWatch Events rule to run one or more tasks at either a specific interval (every <em>n</em> minutes/hours/days) or you can use ccrontab(5) expressions.</p></div>
+<div class="paragraph"><p>Blox is an free/libre, open source project that gives you more control over how your containers run on ECS.</p></div>
+<div class="paragraph"><p>To make appropriate placement decisions and start/stop containers, etc., custom schedulers leverage the same cluster state information and StartTask API operations available to any AWS customer via the ECS API, so it is entirely feasible for you to write your own ECS scheduler.</p></div>
+<div class="paragraph"><p>By default, ECS supports the following task placement strategies:
+* <code>binpack</code>: Place tasks based on the least available amount of CPU or memory. This minimizes the number of instances in use.
+* <code>spread</code>: Place tasks evenly based on the specified value. Accepted values are attribute key:value pairs, instanceId, or host.
+* <code>random</code>: Place tasks randomly.</p></div></aside></section>
+<section id="_a_quick_recap"><h2>A quick recap</h2><div class="ulist"><ul><li><p>ECR =~ Docker Hub on AWS</p></li><li><p>Container Instance =~ EC2 Instance + Docker daemon + ECS Agent daemon</p></li><li><p>Cluster =~ EC2 resource pool</p></li><li><p>Task Definition =~ Description of work</p></li><li><p>Task =~ The actual work</p></li><li><p>Service =~ Manager of indefinite workloads</p></li><li><p>Scheduler =~ Scheduler of the work</p></li></ul></div></section>
+<section id="_but_there_s_an_elephant_in_the_room"><h2>But, there&#8217;s an elephant in the room&#8230;&#8203;</h2><div class="paragraph fragment"><p>The Classic Elastic Load Balancer (CLB) from AWS' minestrone soup (EC2-Classic network) days.</p></div>
+<aside class="notes"><div class="paragraph"><p>So, we&#8217;ve talked about whales, now it&#8217;s time to talk about elephants.</p></div>
+<div class="paragraph"><p>If you really want to drive up utilisation across your (reserved) EC2 instances then there&#8217;s an elephant in the room, the Classic ELB.</p></div></aside></section>
+<section id="_the_holy_trinity_of_elb"><h2>The holy trinity of ELB</h2><div class="olist arabic"><ol class="arabic"><li><p>Original ELB, renamed to Classic Load Balancer (CLB)</p></li><li><p>Application Load Balancer (ALB)</p></li><li><p>Network Load Balancer (NLB)</p></li></ol></div>
+<aside class="notes"><div class="paragraph"><p>It&#8217;s important to understand that ELBs are not magic, they&#8217;re just special EC2 instances running a bastardised HAProxy (I&#8217;m guessing) connected to the EC2 control plane.
+They live inside AWS' ELB VPC (with subnets in each AZ, just like your VPCs), which sits alongside customer VPCs, which they have the ability to inject traffic into.
+Thus the ELB team is also a demanding <em>"customer"</em> of the EC2 team, just like you.</p></div>
+<div class="paragraph"><p>All ELBs always use multiple AZs, so even if you&#8217;re only in one AZ, ELBs will still route traffic though the other AZs, so if AWS loose an AZ, traffic will still get to your box and all requests will be automatically shifted to healthy AZs via Route53.</p></div>
+<div class="paragraph"><p>Also worth a mention, Amazon Certificate Manager (ACM) issues free TLS/SSL certificates, with free automatic renewal, which you can easily associate with your ELBs.</p></div></aside></section>
+<section id="_classic_load_balancer_clb"><h2>Classic Load Balancer (CLB)</h2><div class="dlist"><dl><dt class="hdlist1">GA</dt><dd><p><a href="https://aws.amazon.com/releasenotes/Amazon-EC2/2528">2009-05-17</a></p></dd><dt class="hdlist1">Protocols</dt><dd><p>TCP/SSL (connections level, layer 4) and limited HTTP/HTTPS (request level, layer 7)</p></dd><dt class="hdlist1">Networks</dt><dd><p>EC2-Classic and EC2-VPC</p></dd><dt class="hdlist1">Health Checks/CloudWatch Metrics</dt><dd><p>Limited</p></dd></dl></div>
+<aside class="notes"><div class="paragraph"><p>There are really two different types of load balancers, layer 4 (network) and layer 7 (application).</p></div>
+<div class="paragraph"><p>Layer 4 (network) is connection-based (TCP/SSL) load balancing, simply forwarding packets to the backends without looking at them.
+Incoming client connections are bound to the server, so every time a new request comes in it is bound to a particular backend instance and will never move.
+There&#8217;s no header modification, because they&#8217;re just blindly passing packets through to the backends, which means no <code>X-Forwarded-For</code> header, because they&#8217;re not actually do anything with the request.
+So, if you want to know the source IP of the client that&#8217;s connecting to you there&#8217;s a feature called <a href="https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt">Proxy Protocol</a>, which comes from the HAProxy world, that prepends source and destination IP and ports to requests, thus allowing you to forward the source IP through to the destination.</p></div>
+<div class="paragraph"><p>Layer 7 (application) loads balancers speak HTTP and HTTPS.
+For every request that comes in they wait for all the packets to arrive, reassemble the HTTP request, inspect/modify headers, etc., before forwarding it on.
+Here we&#8217;re doing a lot more work on the load balancer and connections are actually terminated on the load balancer, which have a connection pool open to the backend instances (so you&#8217;ll see them open up multiple connections to your backends) which they use to forward on the HTTP requests.
+At layer 7, headers can be modified (e.g. inserting an <code>X-Forwarded-For</code> header with the source IP of the original requester, etc.).</p></div></aside></section>
+<section id="_clbs_have_some_drawbacks"><h2>CLBs have some drawbacks&#8230;&#8203;</h2></section>
+<section id="_you_can_only_register_1_port_per_instance"><h2>You can only register 1 port per instance!</h2><div class="paragraph"><p>If you tried to register the same instance again with a different port, CLB would say, <em>"no, that instance ID is already registered, go away!"</em></p></div>
+<div class="paragraph"><p>Which basically means a 1:1 between service and instance.</p></div>
+<aside class="notes"><div class="paragraph"><p>So with CLBs you register an instance via the API, but when you did you can only provide 1 port for that instance and then you were done for that instance.
+If you tried to register the same instance again, CLBs would tell you to get lost, which meant a 1:1 container per EC2 instance with CLBs.
+Very wasteful/expensive.</p></div></aside></section>
+<section id="_no_dynamic_port_mappings"><h2>No dynamic port mappings!</h2><div class="paragraph"><p>Therefore with CLB, your task definition contains static port mappings (container port to host port), so the number of container instances you launch must be &gt;= the number of tasks!</p></div>
+<aside class="notes"><div class="paragraph"><p>Which meant <strong>you</strong> had to manage and keep track of all the ports your services listen on (e.g. on a wiki page), because not all containers can listen on 80 because there&#8217;s only one port 80 on a box.
+But you don&#8217;t want control over what ports your containers listen on, ideally containers will all use a dynamic ephemeral port and your load balancer will automagically discover and use them.</p></div></aside></section>
+<section id="_enter_the_application_load_balancer"><h2>Enter the Application Load Balancer</h2><div class="dlist"><dl><dt class="hdlist1">GA</dt><dd><p><a href="https://aws.amazon.com/blogs/aws/new-aws-application-load-balancer/">2016-08-11</a></p></dd><dt class="hdlist1">Protocols</dt><dd><p>HTTP and HTTPS (request level, layer 7)</p></dd><dt class="hdlist1">Networks</dt><dd><p>EC2-VPC only</p></dd><dt class="hdlist1">Health Checks/CloudWatch Metrics</dt><dd><p>Improved</p></dd><dt class="hdlist1">Killer Features</dt><dd><p>Path/Header-based routing (multiple applications behind a single ALB), dynamic port mapping/service discovery, IPv6, HTTP/2, WebSockets, WAF (layer 7 firewall), X-Ray (<code>X-Amzn-Trace-ID</code> header), termination protection and improved performance (valuable for real-time/streaming applications).</p></dd></dl></div>
+<aside class="notes"><div class="paragraph"><p>HTTP/2 and WebSockets are on by default, no additional configuration necessary, if an ALB sees a HTTP/2 or WebSockets request it will automatically upgrade the connection.</p></div>
+<div class="paragraph"><p>AWS Website Application Firewall, is a layer 7 firewall with default rule support for SQL-injection, cross-site scripting, bad-actor IPs, bad bots and HTTP flood attacks, etc.</p></div>
+<div class="paragraph"><p>ALB adds support for request tracing by adding a unique ID to every request that goes through the ALB (e.g. <code>X-Amzn-Trace-ID</code>, which gets pumped into X-Ray).</p></div>
+<div class="paragraph"><p>Termination protection is a feature that was sorely missing from the original ELBs.
+AWS even developed an internal API function named <code>undeleteCustomerELB</code>.
+Haha!</p></div>
+<div class="paragraph"><p>ALBs are much more performant than CLBs, so it might be worth switching and future-proofing yourself even if you don&#8217;t need all the extra features just yet.
+If you were doing very large downloads or streaming the old CLB would do quite a lot of buffering and thats not great, ALB solves this problem.</p></div>
+<div class="paragraph"><p>With ALB the is no additional bandwidth charge for cross-zone traffic.</p></div>
+<div class="paragraph"><p>With CLBs you had the option to use different versions of the managed cypher polices as well as define your own; whereas with ALbs, Amazon only offer managed policies following industry best practices, so you&#8217;re always up-to-date.</p></div>
+<div class="paragraph"><p>Note, ALB breaks ELB API compatibility (the original API was far too simple) and introduces a bunch of new abstractions/resource types (listener rules, target groups, targets).</p></div></aside></section>
+<section id="_there_s_also_network_load_balancers_nlbs_but_we_re"><h2>There&#8217;s also Network Load Balancers (NLBs), but we&#8217;re&#8230;&#8203;</h2><div class="imageblock" style=""><img src="README/out-of-time.jpg" alt="Out of Time (2003)" height="800"></div><div class="title">Courtesy of <a href="http://www.mgm.com/">Metro-Goldwyn-Mayer Studios Inc.</a></div></section>
+<section id="_bascially_albs_are_layer_7_and_nlbs_are_layer_4"><h2>Bascially, ALBs are layer 7 and NLBs are layer 4</h2><aside class="notes"><div class="paragraph"><p>Spotted the problem yet?
+You&#8217;re going to need two ELBs, 1x ALB and 1x NLB to host applications, like Jenkins, which need an ALB for the web UI (8080/HTTP) and an NLB for the AJP connector (8009/AJP13).</p></div></aside></section>
+<section id="_alb_key_concepts_components"><h2>ALB key concepts/components</h2><div class="ulist"><ul><li><p>Load Balancer</p></li><li><p>Listener</p></li><li><p>Listener Rules</p></li><li><p>Target Groups</p></li><li><p>Targets</p></li><li><p>Health Checks</p></li></ul></div>
+<aside class="notes"><div class="paragraph"><p>Back to ALBs.</p></div></aside></section>
+<section id="_load_balancer"><h2>Load Balancer</h2><div class="paragraph"><p><strong>A load balancer serves as the single point of contact for HTTP/HTTPS clients, it&#8217;s where you point your CNAMEs.</strong></p></div>
+<div class="ulist"><ul><li><p>You add one or more listeners to your load balancer.</p></li><li><p>An ALB can also forward to a CLB, which is pretty neat.</p></li></ul></div></section>
+<section id="_listener"><h2>Listener</h2><div class="paragraph"><p><strong>Listeners define the port and protocol on which the load balancer listens for incoming connections from clients and forwards them to one or more target groups, based on listener rules.</strong></p></div>
+<div class="ulist"><ul><li><p>Each ALB needs at least 1 listener to accept incoming traffic.</p></li><li><p>ALBs support up to 50 isteners per load balancer.</p></li></ul></div></section>
+<section id="_listener_rules"><h2>Listener Rules</h2><div class="paragraph"><p><strong>Listener rules (i.e. path-based/header-based routing rules) provide a link between listeners and target groups and consist of conditions, actions and priorities.</strong></p></div>
+<div class="ulist"><ul><li><p>When a request arrives, the listener inspects the condition (e.g. <code>GET /foo/ HTTP/1.1</code> or <code>Foo: bar</code>), runs through all the rules, finds the first one that matches and apples the action, i.e. forward the request to a target in the the specified target group (e.g. <code>foo</code>).</p></li><li><p>Listener rules are evaluated in priority order and a target (from the specified target group) is selected via round robin.</p></li><li><p>You must define a default (catchall) rule for each listener, if you don&#8217;t the ALB will return a 503.</p></li><li><p>ALBs support up to 100 rules per load balancer (not counting default rules).</p></li></ul></div>
+<aside class="notes"><div class="paragraph"><p>If a request doesn&#8217;t match any of the rules then it will fall through to the default rule; therefore, you can emulate a CLB with just a default rule and a single target group.</p></div>
+<div class="paragraph"><p>So as well as path-based routing you can also set different headers (e.g. API versions, etc.) to route requests to different targets.</p></div></aside></section>
+<section id="_target_groups"><h2>Target Groups</h2><div class="paragraph"><p><strong>Target groups are a logical grouping of EC2/ECS container instances behind a load balancer (i.e. the logical grouping of backends).</strong></p></div>
+<div class="ulist"><ul><li><p>They exist independently from load balancers.</p></li><li><p>Targets groups are a regional construct that can be associated with an ASG (different applications that might scale differently).</p></li><li><p>Typically target group boundaries usually map to application boundaries.</p></li><li><p>You can have &gt;1000 targets per target group.</p></li></ul></div>
+<aside class="notes"><div class="paragraph"><p>Auto-scaling now supports scaling at the target group level, which makes sense given that target groups maps to different applications.
+CloudWatch metrics are provided at the global load balancer and target group level.</p></div></aside></section>
+<section id="_targets"><h2>Targets</h2><div class="paragraph"><p><strong>Targets are logical load balancer targets (e.g. EC2 instance, microservice, container).</strong></p></div>
+<div class="ulist"><ul><li><p>Multiple targets can be registered with the same target group (on different ports).</p></li><li><p>A single target can with registered with multiple target groups.</p></li><li><p>ALBs support up to 1000 targets per load balancer.</p></li><li><p>Targets can be on-prem, the only constraint they have to use an RFC 1918 (IPv4) or RFC 4193 (IPv6) address (i.e. VPC peering, DirectConnect, VPN, etc.).</p></li></ul></div>
+<aside class="notes"><div class="paragraph"><p>So, if you have an instance running multiple applications there&#8217;s nothing stopping you registering that instance with multiple target groups, but be careful it&#8217;s a lot of rope!</p></div></aside></section>
+<section id="_health_checks"><h2>Health Checks</h2><div class="paragraph"><p><strong>Health checks, defined on the target group, check the health of your application.</strong></p></div>
+<div class="ulist"><ul><li><p>The load balancer routes requests to the registered targets that are healthy and shifts traffic away from impaired ones.</p></li><li><p>An ASG can also respond to health checks and replace any unhealthy instances.</p></li><li><p>Unlike CLB health checks, you can now pass a list of successful HTTP response codes (not just 200) and ALBs fail open (instead of returning a 503) if all health checks fail.</p></li><li><p>You also get detailed reasons for health check failures (i.e. timeouts, connection errors, 500s, etc.), again something you didn&#8217;t get with CLBs.</p></li></ul></div>
+<aside class="notes"><div class="paragraph"><p>Surge queues (from CLBs) are generally a bad thing; thankfully they are gone, replaced with the rejected connection count metric.</p></div></aside></section>
+<section id="_putting_it_all_together"><h2>Putting it all together</h2></section>
+<section><div class="imageblock" style=""><img src="README/alb.png" alt="ALB Diagram" height="800"></div><div class="title">Courtesy of <a href="https://aws.amazon.com/blogs/compute/microservice-delivery-with-amazon-ecs-and-application-load-balancers/">Amazon Web Services, Inc.</a></div>
+<aside class="notes"><div class="paragraph"><p>Here each listener contains a default rule and one listener contains another rule that routes requests to a different target group
+One target is registered with two target groups.</p></div></aside></section>
+<section><div class="imageblock" style=""><img src="README/ecs.png" alt="ECS Diagram" height="800"></div><div class="title">Courtesy of <a href="http://www.allthingsdistributed.com/2015/07/under-the-hood-of-the-amazon-ec2-container-service.html">Werner Vogels, C.T.O. and V.P. of Amazon.com</a></div></section>
+<section id="_multiple_identical_containers_on_the_same_instance"><h2>Multiple (identical) containers on the same instance</h2><div class="ulist"><ul><li><p>Unlike with CLBs, when you register an EC2 instance with an ALB, you provide both the instance-id <strong>and</strong> the port (which makes up a composite key), so long as the port is different, you can keep registering the same instance over and over.<sup>*</sup></p></li><li><p>Which means (thanks to dynamic port mappings and basic service discovery) multiple instances of the same task can run on the same instance.</p></li><li><p>Therefore, you can carve up a single EC2 instance into smaller and smaller chunks and really drive up the utilisation.</p></li><li><p>Which also means, you don&#8217;t have to worry too much about finding the prefect instance size.</p></li></ul></div>
+<div class="paragraph smallprint"><p><sup>*</sup>The current limit is 1,000 targets per load balancer, but possibly up to ~65,000, if you ask AWS nicely.</p></div></section>
+<section id="_multiple_applications_behind_the_same_load_balancer"><h2>Multiple applications behind the same load balancer</h2><div class="ulist"><ul><li><p>Thanks to their path/header-based routing, ALBs allow you to host multiple applications behind a single load balancer, so you can drop down to one load balancer and reduce your hourly (and operational) costs<sup>*</sup>.</p></li><li><p>That&#8217;s a huge cost saving if you&#8217;re currently running multiple CLBs, because you are hosting multiple applications.</p></li></ul></div>
+<div class="paragraph smallprint"><p><sup>*</sup>Obviously your bandwidth costs will remain the same, assuming your severing the same amount of traffic.</p></div></section>
+<section id="_ecs_alb"><h2>ECS + ALB</h2><div class="ulist"><ul><li><p>If you combine ALB with ECS, ECS will automatically register tasks with an ALB using dynamic ports (just set <code>hostPort</code> to <code>0</code> in your task definition).</p></li><li><p>This is not just supported by ECS, if you&#8217;re only running a few services on a single box, so long as their listening on different ports, you can register the same instance multiple times with an ALB.</p></li><li><p>Therefore, you can mix and match between EC2 instances and containers (i.e. ECS tasks) as you migrate/move/redevelop your application/infrastructure.</p></li></ul></div></section>
+<section id="_remember_les_law_where_we_traded_utilisation_for_ha"><h2>Remember Les' Law (where we traded utilisation for HA)?</h2><div class="paragraph"><p><strong><em>m = e * az * opec2</em></strong></p></div>
+<div class="paragraph smallprint"><p>3 environments (<em>e</em>) x 2 availability zones (<em>az</em>) x 1 over-provisioned EC2 instances (<em>opec2</em>) = 6 over-provisioned EC2 instances per microservice (<em>m</em>)</p></div>
+<div class="paragraph"><p>With ECS + ALB you you can run 2, 5, 10 or 100 different microservices or copies of the same microservice on the same 6 EC2 instances; whereas previously with EC2 + ELB you had wasted capacity and increased overheads because a t2-micro was too large for your microservice and you needed an ELB for each of them.</p></div>
+<aside class="notes"><div class="paragraph"><p>Now if you consider full production environments spread across multiple regions and savings can be pretty tremendous.</p></div></aside></section>
+<section id="_a_couple_of_notes_of_caution"><h2>A couple of notes of caution</h2></section>
+<section id="_consider_your_blast_radius_when_grouping_applications_on_a_single_ecs_cluster_behind_a_single_alb"><h2>Consider your blast radius when grouping applications on a single ECS cluster behind a single ALB.</h2></section>
+<section id="_if_you_do_your_homework_and_get_all_of_this_right_you_should_always_be_running_at_full_capacity_so_you_might_starting_seeing_errors_at_your_quietest_times_if_you_ve_taken_out_too_much_capacity"><h2>If you do your homework and get all of this right you should always be running at full capacity, so you might starting seeing errors at your quietest times if you&#8217;ve taken out too much capacity.</h2></section>
+<section id="_ecs_has_a_few_known_limitations"><h2>ECS has a few known limitations</h2><div class="ulist"><ul><li><p>CloudWatch&#8217;s standard 5 minute intervals is not really quick enough to react to scaling events (you need see what&#8217;s going on at a more granular level), so you <strong>have</strong> to pay for enhanced metrics, if you&#8217;re not already.</p></li><li><p>Lack of container-level monitoring, plus the usual CloudWatch limitations you&#8217;re all familiar with.</p></li><li><p>It&#8217;s not easy to tell at a glance all the containers running on an instance.</p></li></ul></div>
+<div class="paragraph smallprint"><p>We&#8217;re currently using <a href="https://prometheus.io/">Prometheus</a> (Apache-2.0) to help with some of this.</p></div></section>
+<section id="_want_to_get_started"><h2>Want to get started?</h2><div class="paragraph"><p>Try the ECS first run wizard at <a href="https://console.aws.amazon.com/ecs/home#/firstRun" class="bare">https://console.aws.amazon.com/ecs/home#/firstRun</a>, just be aware of the AWS costs incurred as a result.</p></div></section>
+<section id="_and_finally_very_briefly_ecs_vs_kubernetes_sup_sup"><h2>And finally, very briefly, ECS vs. Kubernetes<sup>*</sup></h2><div class="paragraph smallprint"><p><sup>*</sup>From the point of view of someone without any production K8s experience.</p></div>
+<aside class="notes"><div class="paragraph"><p>Microsoft are here at the Docker Meetup trying to sell you Kubernetes on Azure, so here&#8217;s a very brief look at ECS vs. Kubernetes from the point of view of someone without any production K8s experience.</p></div></aside></section>
+<section id="_ecs"><h2>ECS</h2><div class="ulist"><ul><li><p>Easy to grok.</p></li><li><p>Operational simplicity.</p></li><li><p>If you can <code>docker run</code>, generally you&#8217;re good to go on ECS (just give your cluster a name and you start loading up your EC2 instances with containers).</p></li><li><p>Familiar AWS environment (mostly).</p></li><li><p>Lots of people already use AWS.</p></li><li><p>Doesn&#8217;t try to solve all your problems.</p></li></ul></div></section>
+<section id="_k8s"><h2>K8s</h2><div class="ulist"><ul><li><p>Brilliantly engineered, but quite heady.</p></li><li><p>A much bigger platform with a lot of extra constructs/abstractions.</p></li><li><p>Substantial ops burden when running outside of GCE (and Azure?).</p></li><li><p>Tries to solve all your problems (e.g. deployment model, monitoring, logging, etc. are all easier problems on K8s).</p></li></ul></div>
+<aside class="notes"><div class="paragraph"><p>Kubernetes is seeing a lot of the same hype Docker was seeings a few years back, i.e. if you run Kubernetes all your deployment/CD problems will solved, which is not the case.</p></div></aside></section>
+<section id="_roll_credits_in_order_of_appearance"><h2>Roll credits (in order of appearance)</h2><div class="ulist credits"><ul><li><p><a href="https://en.wikipedia.org/wiki/Blue_whale" class="bare">https://en.wikipedia.org/wiki/Blue_whale</a></p></li><li><p><a href="http://www.nationalgeographic.com/animals/mammals/b/blue-whale/" class="bare">http://www.nationalgeographic.com/animals/mammals/b/blue-whale/</a></p></li><li><p>Schlesinger, W. H., Holland, H. D. &amp; Turekian, K. K., <em>Biogeochemistry</em>, Volume 8 (Elsevier, 2005)</p></li><li><p><a href="https://blog.education.nationalgeographic.com/2015/08/31/how-big-is-a-blue-whales-heart/" class="bare">https://blog.education.nationalgeographic.com/2015/08/31/how-big-is-a-blue-whales-heart/</a></p></li><li><p><a href="https://en.wikipedia.org/wiki/MDMA" class="bare">https://en.wikipedia.org/wiki/MDMA</a></p></li><li><p><a href="https://www.docker.com/" class="bare">https://www.docker.com/</a></p></li><li><p><a href="https://github.com/moby" class="bare">https://github.com/moby</a></p></li><li><p><a href="https://blog.docker.com/2015/05/dockers-2nd-birthday-by-the-numbers/" class="bare">https://blog.docker.com/2015/05/dockers-2nd-birthday-by-the-numbers/</a></p></li><li><p><a href="https://blog.docker.com/2015/02/docker-project-announces-open-source-a-thon-to-support-whale-and-marine-wildlife-conservation/" class="bare">https://blog.docker.com/2015/02/docker-project-announces-open-source-a-thon-to-support-whale-and-marine-wildlife-conservation/</a></p></li><li><p><a href="http://www.oceanicsociety.org/" class="bare">http://www.oceanicsociety.org/</a></p></li><li><p>Schmidt, K., <em>High Availability and Disaster Recovery: Concepts, Design, Implementation</em> (Springer-Verlag, 2006)</p></li><li><p><a href="http://dockerdocs.org/what-is-docker/" class="bare">http://dockerdocs.org/what-is-docker/</a></p></li><li><p><a href="http://fortune.com/global500" class="bare">http://fortune.com/global500</a></p></li><li><p><a href="https://en.wikipedia.org/wiki/List_of_the_largest_information_technology_companies" class="bare">https://en.wikipedia.org/wiki/List_of_the_largest_information_technology_companies</a></p></li><li><p><a href="https://en.wikipedia.org/wiki/List_of_Amazon.com_products_and_services" class="bare">https://en.wikipedia.org/wiki/List_of_Amazon.com_products_and_services</a></p></li><li><p><a href="https://martinfowler.com/articles/microservices.html" class="bare">https://martinfowler.com/articles/microservices.html</a></p></li><li><p><a href="http://arnon.me/2014/03/services-microservices-nanoservices/" class="bare">http://arnon.me/2014/03/services-microservices-nanoservices/</a></p></li><li><p><a href="http://www.codingthearchitecture.com/2014/05/01/where_is_the_complexity.html" class="bare">http://www.codingthearchitecture.com/2014/05/01/where_is_the_complexity.html</a></p></li><li><p><a href="https://aws.amazon.com/about-aws/whats-new/2015/04/amazon-ec2-container-service-is-now-generally-available/" class="bare">https://aws.amazon.com/about-aws/whats-new/2015/04/amazon-ec2-container-service-is-now-generally-available/</a></p></li><li><p><a href="https://aws.amazon.com/ecs/pricing/" class="bare">https://aws.amazon.com/ecs/pricing/</a></p></li><li><p><a href="https://aws.amazon.com/elasticbeanstalk/" class="bare">https://aws.amazon.com/elasticbeanstalk/</a></p></li><li><p><a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/" class="bare">http://docs.aws.amazon.com/AmazonECS/latest/developerguide/</a></p></li><li><p><a href="https://aws.amazon.com/ecr/pricing/" class="bare">https://aws.amazon.com/ecr/pricing/</a></p></li><li><p><a href="https://hub.docker.com/" class="bare">https://hub.docker.com/</a></p></li><li><p><a href="https://github.com/aws/amazon-ecs-agent" class="bare">https://github.com/aws/amazon-ecs-agent</a></p></li><li><p><a href="https://aws.amazon.com/marketplace/pp/B00U6QTYI2" class="bare">https://aws.amazon.com/marketplace/pp/B00U6QTYI2</a></p></li><li><p><a href="http://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html" class="bare">http://docs.aws.amazon.com/AmazonECS/latest/developerguide/container_instance_AMIs.html</a></p></li><li><p><a href="http://docs.aws.amazon.com/cli/latest/reference/ecs/register-task-definition.html" class="bare">http://docs.aws.amazon.com/cli/latest/reference/ecs/register-task-definition.html</a></p></li><li><p><a href="https://github.com/blox/blox" class="bare">https://github.com/blox/blox</a></p></li><li><p><a href="https://aws.amazon.com/releasenotes/Amazon-EC2/2528" class="bare">https://aws.amazon.com/releasenotes/Amazon-EC2/2528</a></p></li><li><p><a href="https://aws.amazon.com/blogs/aws/new-aws-application-load-balancer/" class="bare">https://aws.amazon.com/blogs/aws/new-aws-application-load-balancer/</a></p></li><li><p><a href="http://www.mgm.com/" class="bare">http://www.mgm.com/</a></p></li><li><p><a href="http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html" class="bare">http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html</a></p></li><li><p><a href="https://aws.amazon.com/blogs/compute/microservice-delivery-with-amazon-ecs-and-application-load-balancers/" class="bare">https://aws.amazon.com/blogs/compute/microservice-delivery-with-amazon-ecs-and-application-load-balancers/</a></p></li><li><p><a href="http://www.allthingsdistributed.com/2015/07/under-the-hood-of-the-amazon-ec2-container-service.html" class="bare">http://www.allthingsdistributed.com/2015/07/under-the-hood-of-the-amazon-ec2-container-service.html</a></p></li><li><p><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/" class="bare">https://docs.aws.amazon.com/elasticloadbalancing/latest/application/</a></p></li><li><p><a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/network/" class="bare">https://docs.aws.amazon.com/elasticloadbalancing/latest/network/</a></p></li><li><p><a href="https://aws.amazon.com/blogs/compute/bluegreen-deployments-with-amazon-ecs/" class="bare">https://aws.amazon.com/blogs/compute/bluegreen-deployments-with-amazon-ecs/</a></p></li><li><p><a href="https://github.com/awslabs/ecs-blue-green-deployment" class="bare">https://github.com/awslabs/ecs-blue-green-deployment</a></p></li><li><p><a href="https://prometheus.io/" class="bare">https://prometheus.io/</a></p></li><li><p><a href="https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/" class="bare">https://kubernetes.io/docs/concepts/overview/what-is-kubernetes/</a></p></li><li><p><a href="https://console.aws.amazon.com/ecs/home#/firstRun" class="bare">https://console.aws.amazon.com/ecs/home#/firstRun</a></p></li></ul></div>
+<div class="paragraph smallprint"><p>There are a lot of good materials out there; <a href="https://duckduckgo.com/">DDG</a> is your friend!</p></div>
+<aside class="notes"><div class="paragraph"><p>List of references/sources in order of appearance.</p></div></aside></section>
+<section id="_thank_you_for_listening"><h2>Thank you for listening!</h2><div class="paragraph"><p>Q&amp;A + Demo<sup>*</sup></p></div>
+<div class="paragraph smallprint"><p><sup>*</sup>Time permitting.</p></div>
+<aside class="notes"><div class="paragraph"><p>We only scratched the surface here and obviously there&#8217;s a lot more detail we could have gone onto had this talk been scheduled for a day (or a week), instead of an hour.</p></div>
+<div class="admonitionblock warning"><table><tr><td class="icon"><div class="title">Warning</div></td><td class="content">With regards to the demo, attempting to push the base <a href="https://hub.docker.com/_/golang/">golang image</a> to a fresh ECR repository may take an awful long time.</td></tr></table></div></aside></section></div></div><script src="reveal.js/lib/js/head.min.js"></script><script src="reveal.js/js/reveal.js"></script><script>// See https://github.com/hakimel/reveal.js#configuration for a full list of configuration options
+Reveal.initialize({
+  // Display controls in the bottom right corner
+  controls: false,
+  // Display a presentation progress bar
+  progress: false,
+  // Display the page number of the current slide
+  slideNumber: true,
+  // Push each slide change to the browser history
+  history: true,
+  // Enable keyboard shortcuts for navigation
+  keyboard: true,
+  // Enable the slide overview mode
+  overview: true,
+  // Vertical centering of slides
+  center: true,
+  // Enables touch navigation on devices with touch input
+  touch: true,
+  // Loop the presentation
+  loop: false,
+  // Change the presentation direction to be RTL
+  rtl: false,
+  // Turns fragments on and off globally
+  fragments: true,
+  // Flags if the presentation is running in an embedded mode,
+  // i.e. contained within a limited portion of the screen
+  embedded: false,
+  // Number of milliseconds between automatically proceeding to the
+  // next slide, disabled when set to 0, this value can be overwritten
+  // by using a data-autoslide attribute on your slides
+  autoSlide: 0,
+  // Stop auto-sliding after user input
+  autoSlideStoppable: true,
+  // Enable slide navigation via mouse wheel
+  mouseWheel: false,
+  // Hides the address bar on mobile devices
+  hideAddressBar: true,
+  // Opens links in an iframe preview overlay
+  previewLinks: false,
+  // Theme (e.g., beige, black, league, night, serif, simple, sky, solarized, white)
+  // NOTE setting the theme in the config no longer works in reveal.js 3.x
+  //theme: Reveal.getQueryHash().theme || 'simple',
+  // Transition style (e.g., none, fade, slide, convex, concave, zoom)
+  transition: Reveal.getQueryHash().transition || 'none',
+  // Transition speed (e.g., default, fast, slow)
+  transitionSpeed: 'fast',
+  // Transition style for full page slide backgrounds (e.g., none, fade, slide, convex, concave, zoom)
+  backgroundTransition: 'none',
+  // Number of slides away from the current that are visible
+  viewDistance: 3,
+  // Parallax background image (e.g., "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'")
+  parallaxBackgroundImage: '',
+  // Parallax background size in CSS syntax (e.g., "2100px 900px")
+  parallaxBackgroundSize: '',
+
+  // The "normal" size of the presentation, aspect ratio will be preserved
+  // when the presentation is scaled to fit different resolutions. Can be
+  // specified using percentage units.
+  width: '100%',
+  height: '100%',
+
+  // Factor of the display size that should remain empty around the content
+  margin: 0.1,
+
+  // Bounds for smallest/largest possible scale to apply to content
+  minScale: 0.2,
+  maxScale: 1.5,
+
+  // Optional libraries used to extend on reveal.js
+  dependencies: [
+      { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+  ]
+});</script></body></html>

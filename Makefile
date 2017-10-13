@@ -55,7 +55,7 @@ build: $(BIN)
 
 # install compiles and installs the packages named by the import paths, along with their dependencies
 .PHONY: install
-install: 
+install:
 	go install -v -x $(LDFLAGS) $(PKG)
 
 # go run
@@ -99,7 +99,7 @@ docker-push:
 reveal.js:
 	bundle install --path .bundle
 	curl -sSL https://github.com/hakimel/reveal.js/archive/3.5.0.tar.gz | tar -xz && mv reveal.js-*.*.* reveal.js
-	curl -sSL https://raw.githubusercontent.com/isagalaev/highlight.js/master/src/styles/grayscale.css > reveal.js/lib/css/grayscale.css	
+	curl -sSL https://raw.githubusercontent.com/isagalaev/highlight.js/master/src/styles/grayscale.css > reveal.js/lib/css/grayscale.css
 
 README.html: README.asc reveal.js
 	bundle exec asciidoctor-revealjs $(<)

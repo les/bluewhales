@@ -64,7 +64,7 @@ The African elephant (Loxodonta), is the largest/heaviest land animal; males sta
 
 Land animals need to use their skeleton and muscles to support their body mass against the force of gravity (an elephant's skeleton comprises 27% of its body weight), whereas marine mammals are supported by the buoyant force of salt water (a blue whale's skeleton only comprises 15% of its body weight).
 
-Sadly, if you were to remove a blue whale from the ocean it would be crushed to death under its own weight a result of the effects of gravity.
+Sadly, if you were to remove a blue whale from the ocean it would be crushed to death under its own weight as a result of the effects of gravity.
 
 A blue whale's heart weighs about 640 times as much as a human heart.
 
@@ -190,7 +190,7 @@ Profit (a.k.a. net income), generally implies total revenue minus total expenses
 In accounting, revenue is referred to as _"the top line"_, due to its position on the income statement; whereas, profit is referred to a as _"the bottom line"_, which denotes net income (i.e. gross revenues minus total expenses).
 
 A fiscal year (a.k.a. financial year) is the period used by governments for accounting and budget purposes, which vary between countries.
-It is also used for financial reporting by business and other organizations.
+It is also used for financial reporting by businesses and other organizations.
 --
 
 
@@ -228,7 +228,7 @@ It is also used for financial reporting by business and other organizations.
 
 == Let's quickly talk about microservices
 
-Microservices is an evolution of SOA, whereby large software applications are broken down into a collection of small, modular, loosely-coupled and independently-deployable services that communicates with one another through well-defined, lightweight protocols/APIs.
+Microservices is an evolution of SOA, whereby large software applications are broken down into a collection of small, modular, loosely-coupled and independently-deployable services that communicate with one another through well-defined, lightweight protocols/APIs.
 
 Decomposing a typically large application into small, functionally-unique microservices, improves modularity and helps makes applications easier to understand, develop, refactor, test and scale (in isolation).
 
@@ -240,7 +240,7 @@ Decomposing a typically large application into small, functionally-unique micros
 . Moving responsibilities between services can be more difficult, i.e. transfer of knowledge between teams, use of multiple programming languages, etc.
 . Remote calls (over the network) are more expensive (e.g. network latency, message processing, etc.) than in-process calls.
 . Which also introduces additional complexity and new problems, such as network latency, message formats, load balancing and fault tolerance, etc.
-. Deployment and integration testing also become more complicated.
+. Deployment and integration testing also becomes more complicated.
 
 [.smallprint]
 To mention a few.
@@ -259,7 +259,7 @@ The complexity of a monolithic application is only shifted into the network, but
 --
 
 
-== So, you invest time/resources into benchmarking your application only to find that a t2.nano/t2.micro is too big for a single microservice!
+== So you invest time/resources into benchmarking your application, only to find that a t2.nano/t2.micro is too big for a single microservice!
 
 [NOTE.speaker]
 --
@@ -285,7 +285,7 @@ The reality is, most of us are in 3 AZs and multiple regions (particularly in pr
 --
 
 
-== Les' Law 
+== Les' Law
 
 {empty} +
 
@@ -297,7 +297,7 @@ The reality is, most of us are in 3 AZs and multiple regions (particularly in pr
 And for those who can't do the maths...
 
 [.smallprint]
-3 environments (_e_) x 2 availability zones (_az_) x 1 over-provisioned EC2 instances (_opec2_) = 6 over-provisioned EC2 instances per microservice (_m_)
+3 environments (_e_) x 2 availability zones (_az_) x 1 over-provisioned EC2 instance (_opec2_) = 6 over-provisioned EC2 instances per microservice (_m_)
 
 [NOTE.speaker]
 --
@@ -316,7 +316,7 @@ You also have 1x CLB per microservice, per environment^*^!
 
 == Actually I lied...
 
-This isn't my equation; someone at Amazon worked this out a long time ago, which (if you think back a few slides) is why Amazon is the world's third largest technology company based on revenue.
+This isn't my equation, well it is, but someone at Amazon worked this out a long time ago, which (if you think back a few slides) is why Amazon is the world's third largest technology company based on revenue.
 
 
 == So, what is ECS?
@@ -401,6 +401,7 @@ The https://www.apache.org/licenses/LICENSE-2.0[Apache License, Version 2.0] is 
 *A ECS Task Definition describes the configuration of a single container or group of containers (e.g. which Docker image to use, what data volumes to attach and any ports to expose, etc.), similar to a `docker-compose.yml`.*
 
 Some of the things you can configure in a task definition include:
+
 * Docker image(s) to use.
 * CPU and memory allocation per container.
 * Containers links.
@@ -612,7 +613,7 @@ Which basically means a 1:1 between service and instance.
 
 [NOTE.speaker]
 --
-So with CLBs you register an instance via the API, but when you did you can only provide 1 port for that instance and then you were done for that instance.
+So with CLBs you register an instance via the API, but when you do you can only provide 1 port for that instance and then you were done for that instance.
 If you tried to register the same instance again, CLBs would tell you to get lost, which meant a 1:1 container per EC2 instance with CLBs.
 Very wasteful/expensive.
 --
